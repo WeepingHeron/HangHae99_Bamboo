@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { __getPost } from "./redux/modules/posts";
 
 const App = () => {
+  console.log('hello');
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
 
