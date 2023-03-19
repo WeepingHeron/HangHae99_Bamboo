@@ -3,7 +3,7 @@
       "access_token": "9k3kljnslkdj_34lk2j34lks09sv",
       "userId": 123
     },
-    "test": [
+    "posts": [
       {
         "id": 1,
         "title": "json-server 편해요",
