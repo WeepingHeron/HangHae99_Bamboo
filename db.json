@@ -1,5 +1,0 @@
-{
-  "signin": { "statuscode": "200", "message": "로그인 성공" },
-  "signup": { "statuscode": "201", "message": "회원가입 성공" },
-  "signout": { "statuscode": "200", "message": "로그아웃 성공" }
-}
