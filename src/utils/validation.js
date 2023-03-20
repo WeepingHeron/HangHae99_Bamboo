@@ -2,16 +2,16 @@
 // password: '길이 8 ~ 15, 알파벳 대소문자(a~z, A~Z), 숫자(0~9), 특수문자',
 // username: '길이 4 ~ 10, 알파벳 소문자(a~z), 숫자(0~9)',
 
-const idRegex = new RegExp('[\\w-\\.]+@([\\w]+\\.)+[\\w.]{2,4}');
-const pwRegex = new RegExp(
-  '[a-zA-Z0-9!@#$%^&*()_+\\-=\\[\\]{};\':"\\\\|,.<>\\/?]+'
-);
-const usernameRegex = new RegExp('^[a-z0-9]+');
+const regex = {
+  id: new RegExp('[\\w-\\.]+@([\\w]+\\.)+[\\w.]{2,4}'),
+  password: RegExp('[a-zA-Z0-9!@#$%^&*()_+\\-=\\[\\]{};\':"\\\\|,.<>\\/?]+'),
+  username: new RegExp('^[a-z0-9]+'),
+};
 
 const Validation = {
-  email: id => idRegex.test(id),
-  username: username => usernameRegex.test(username),
-  password: pw => pwRegex.test(pw),
+  email: id => regex.id.test(id),
+  username: username => regex.username.test(username),
+  password: pw => regex.password.test(pw),
 };
 
 const signUpValidation = (id, pw, username) => {
