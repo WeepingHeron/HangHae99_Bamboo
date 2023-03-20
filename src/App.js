@@ -1,7 +1,13 @@
-import Signin from './pages/Signin';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 
 function App() {
-  return <Signin></Signin>;
+  return (
+    <>
+      <SignUp></SignUp>
+      {/* <SignIn></SignIn> */}
+    </>
+  );
 }
 
 export default App;
