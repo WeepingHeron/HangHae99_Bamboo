@@ -1,13 +1,30 @@
 import React from 'react';
 import useInput from 'src/hooks/useInput';
+import api from 'src/axios/api';
+import { signInValidation } from 'src/utils/validation';
 
-function Signin() {
+function SignIn() {
   const [id, onChangeIdHandler] = useInput('');
   const [pw, onChangePwHandler] = useInput('');
-  const [username, onChangeUsernameHandler] = useInput('');
-  const [type, onChangeTypeHandler] = useInput('');
 
-  // email, 패스워드 검증 필요
+  const onSubmitHandler = e => {
+    e.preventDefault();
+    const check = signInValidation(id, pw);
+    if (check) sendRequest();
+  };
+
+  const sendRequest = async () => {
+    const body = { email: id, password: pw };
+
+    const response = await api
+      .post('/auth/signin', body)
+      .catch(error => console.error(error));
+
+    const token = response.headers.authorization.split(' ')[1];
+
+    localStorage.setItem('jwt', token);
+  };
+
   return (
     <div
       style={{
@@ -17,53 +34,34 @@ function Signin() {
         alignItems: 'center',
       }}
     >
+      {/* <h1>로그인</h1> */}
       <form>
         <div>
-          <label htmlFor="">아이디</label>
+          <label htmlFor="id">아이디</label>
           <input
-            type="email"
+            id="id"
+            type="text"
             value={id}
             onChange={onChangeIdHandler}
-            required
           />
         </div>
         <div>
-          <label htmlFor="">패스워드</label>
+          <label htmlFor="password">비밀번호</label>
           <input
+            id="password"
             type="password"
             value={pw}
             onChange={onChangePwHandler}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="">닉네임</label>
-          <input
-            type="text"
-            value={username}
-            onChange={onChangeUsernameHandler}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="">회원 종류</label>
-          <input
-            type="text"
-            value={type}
-            onChange={onChangeTypeHandler}
-            required
           />
         </div>
         <input
           type="submit"
-          onClick={e => {
-            e.preventDefault();
-            console.log(id, pw, username, type);
-          }}
+          value="로그인"
+          onClick={onSubmitHandler}
         />
       </form>
     </div>
   );
 }
 
-export default Signin;
+export default SignIn;
