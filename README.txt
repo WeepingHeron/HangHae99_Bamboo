@@ -12,3 +12,9 @@ commit #2
 /src/index.js 수정
 /src/pages/Home.jsx 수정
 thunk는 일단 배제
+
+commit #3
+/src/shared/Router.js 추가
+/src/App.js 수정
+/src/pages/List.jsx 추가
+/src/pages/Detail.jsx 추가

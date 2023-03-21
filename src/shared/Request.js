@@ -1,10 +1,8 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: 'http://localhost:3000'
-});
-
-
-instance.defaults.headers.common['Authorization'] = 'Bearer9k3kljnslkdj_34lk2j34lks09sv';
+    baseURL: 'http://localhost:3001'
+})
+instance.defaults.headers.common['Authorization'] = 'Bearer<Token>';
 
 export default instance;

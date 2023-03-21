@@ -1,44 +1,37 @@
 // Redux requires that we write all state updates immutably, by making copies of data and updating the copies.
 // However, RTK's createSlice and createReducer APIs use Immer inside to allow us to write 'muatating' update logic that becomes correct immutable updates.
 
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios"
+
+export const getPostsThunk = createAsyncThunk('getPosts', async(payload, thunk) => {
+    //서버에서 가져오는 로직
+    const data = await axios.get('http://localhost:3001/posts')
+    console.log(data.data)
+    // 서버에서 가져온 posts를 store에 넣기
+    return thunk.fulfillWithValue(data.data)
+})
 
 const initialState = {
-    post: {
-        id: '0',
-        title: '',
-        type: '',
-        content: '',
-    },
+    posts: [], post:{}
 };
-
-const asyncUpFetch = createAsyncThunk(                                                     // action creator, 2개의 parameter 필요 (action type, 실제로 일을 할 함수 )
-    'postSlice/asyncupFetch',
-    async () => {
-        const resp = await fetch('http://localhost:3000')
-        const data = await resp.json();
-        return data.value;
-    }
-)
 
 const postSlice = createSlice({
     name: 'postSlice',
     initialState,
-    reducers: {                                                                             // 동기 작업, toolkit이 자동으로 action creator 만들어줌
+    reducers: {
         addPost: (state, action) => {
-            state.post = [...state.post, action.payload]
+            state.posts = [...state.posts, action.payload]
         },
 
         deletePost: (state, action) => {
-            state.post = state.post.filter((post) => post.id !== action.payload)
-        },
-
-        // editPost: (state, action) => {
-        //     state.post = 
-        // },
+            state.posts = state.posts.filter((post) => post.id !== action.payload)
+        }
     },
+    extraReducers: {
+        [getPostsThunk.fulfilled]: (state, action) => {state.posts = action.payload}
+    }
     });
 
+export default postSlice;
 export const { addPost, deletePost } = postSlice.actions;
-export default postSlice.reducer;
-export { asyncUpFetch };
