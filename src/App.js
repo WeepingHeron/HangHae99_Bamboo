@@ -1,11 +1,11 @@
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
+import GlobalStyle from 'src/styles/GlobalStyle';
+import Router from 'src/router/Router';
 
 function App() {
   return (
     <>
-      <SignUp></SignUp>
-      <SignIn></SignIn>
+      <GlobalStyle />
+      <Router />
     </>
   );
 }

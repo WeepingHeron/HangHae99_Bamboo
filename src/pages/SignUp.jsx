@@ -2,6 +2,8 @@ import React from 'react';
 import useInput from 'src/hooks/useInput';
 import api from 'src/axios/api';
 import { signUpValidation } from 'src/utils/validation';
+import Header from 'src/components/Header';
+import Footer from 'src/components/Footer';
 
 function SignUp() {
   const [id, onChangeIdHandler] = useInput('');
@@ -42,69 +44,73 @@ function SignUp() {
 
   // email, 패스워드 검증 필요
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      {/* <h1>회원가입</h1> */}
-      <form>
-        <div>
-          <label htmlFor="">아이디</label>
+    <>
+      <Header />
+      <div
+        style={{
+          height: '100vh',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        {/* <h1>회원가입</h1> */}
+        <form>
+          <div>
+            <label htmlFor="">아이디</label>
+            <input
+              type="email"
+              value={id}
+              onChange={onChangeIdHandler}
+              required
+              maxLength="50"
+              minLength="6"
+            />
+          </div>
+          <div>
+            <label htmlFor="">패스워드</label>
+            <input
+              type="password"
+              value={pw}
+              onChange={onChangePwHandler}
+              required
+              maxLength="15"
+              minLength="8"
+            />
+          </div>
+          <div>
+            <label htmlFor="">닉네임</label>
+            <input
+              type="text"
+              value={username}
+              onChange={onChangeUsernameHandler}
+              required
+              maxLength="10"
+              minLength="4"
+            />
+          </div>
+          <div>
+            <label htmlFor="">회원 종류</label>
+            <input
+              type="text"
+              value={type}
+              onChange={onChangeTypeHandler}
+              required
+            />
+          </div>
           <input
-            type="email"
-            value={id}
-            onChange={onChangeIdHandler}
-            required
-            maxLength="50"
-            minLength="6"
+            type="submit"
+            value="회원가입"
+            onClick={e => {
+              e.preventDefault();
+              const check = signUpValidation(id, pw, username);
+              if (check) onSubmitEventHandler();
+            }}
           />
-        </div>
-        <div>
-          <label htmlFor="">패스워드</label>
-          <input
-            type="password"
-            value={pw}
-            onChange={onChangePwHandler}
-            required
-            maxLength="15"
-            minLength="8"
-          />
-        </div>
-        <div>
-          <label htmlFor="">닉네임</label>
-          <input
-            type="text"
-            value={username}
-            onChange={onChangeUsernameHandler}
-            required
-            maxLength="10"
-            minLength="4"
-          />
-        </div>
-        <div>
-          <label htmlFor="">회원 종류</label>
-          <input
-            type="text"
-            value={type}
-            onChange={onChangeTypeHandler}
-            required
-          />
-        </div>
-        <input
-          type="submit"
-          value="회원가입"
-          onClick={e => {
-            e.preventDefault();
-            const check = signUpValidation(id, pw, username);
-            if (check) onSubmitEventHandler();
-          }}
-        />
-      </form>
-    </div>
+        </form>
+      </div>
+      <Footer />
+    </>
   );
 }
 
