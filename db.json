@@ -1,18 +1,33 @@
 {
-    "token": {
-      "access_token": "9k3kljnslkdj_34lk2j34lks09sv",
-      "userId": 123
+  "token": {
+    "access_token": "9k3kljnslkdj_34lk2j34lks09sv",
+    "userId": 123
+  },
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server 편해요",
+      "body": "굿"
     },
-    "posts": [
-      {
-        "id": 1,
-        "title": "json-server 편해요",
-        "body": "굿"
-      },
-      {
-        "id": 2,
-        "title": "백엔드 만들기 귀찮을떈?",
-        "body": "json-server를 쓰면 된다"
-      }
-    ]
-  }
+    {
+      "id": 2,
+      "title": "백엔드 만들기 귀찮을떈?",
+      "body": "json-server를 쓰면 된다"
+    },
+    {
+      "id": 3,
+      "title": "123",
+      "content": "123"
+    },
+    {
+      "id": 4,
+      "title": "123",
+      "content": "123"
+    },
+    {
+      "id": 5,
+      "title": "123",
+      "content": "123"
+    }
+  ]
+}
