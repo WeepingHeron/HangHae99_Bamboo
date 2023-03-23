@@ -1,48 +1,41 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { editPost, getPostByID } from "../redux/modules/postSlice";
+import { editPost } from "../redux/modules/postSlice";
 import axios from "axios";
 
 
-const Modal = ({ closeHandler, closeLabel, postId }) => {
+const Modal = ({ closeHandler, closeLabel, post }) => {
     const dispatch = useDispatch();
-    const post = useSelector((state) => state.postSlice.post);
+    // const posts = useSelector((state) => state.postSlice.posts);
   
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+    
   
     useEffect(() => {
-          dispatch(getPostByID(postId));
-      }, [dispatch, postId]);
-
-    useEffect(() => {
-        if (post) {
-            setTitle(post.title);
-            setContent(post.content);
-        }
-    }, [post]);
-
-    useEffect(() => {
-        if (!post) {
-          dispatch(getPostByID({ id: postId }));
-        }
-      }, [dispatch, post, postId]);
+        dispatch(editPost());
+    }, [dispatch])
+    // useEffect(() => {
+    //     if (posts) {
+    //         setTitle(posts.title);
+    //         setContent(posts.content);
+    //     }
+    // }, [posts]);
       
 
-    const onEditPost = () => {
-        axios
-            .put(`http://localhost:3001/posts/${postId}`, {
+    const onEditPost = (post) => {
+            axios
+            .put(`http://localhost:3001/posts/${post.id}`, {
                 title: title,
                 content: content
             })
-            .then(function (response) {
-                console.log(response)
-                dispatch(editPost({ id:postId, title: title, content: content }));
+            .then(function () {
+                dispatch(editPost(post));
             })
             .catch(function(error){
                 console.log(error);
-            });
+            });        
     };
 
     const onChangeHandler = (event) => {
@@ -56,29 +49,22 @@ const Modal = ({ closeHandler, closeLabel, postId }) => {
 
 
     return (
-    <div key={postId}>
+    <div key={post}>
         <Dimmed onClick={!closeLabel ? closeHandler : ()=>{}} />
             <StContainer className={'modal'}>
                 <section>
-                    {/* <main>{children}</main>
-                    <div>
-                        <>
-                        <div className="post-title">{post ? post.title : ''}</div>
-                        <div>{post ? post.content : ''}</div>
-                        </>
-                    </div> */}
                     <label>제목</label>
                         <input
                         type='text'
                         name='title'
-                        value={title || postId?.title || ""}
+                        value={title || ''}
                         onChange={onChangeHandler}
                         />
                     <label>내용</label>
                         <input
                         type='text'
                         name='content'
-                        value={content || postId?.content || ""}
+                        value={content || ''}
                         onChange={onChangeHandler}
                         />
                     <footer>
@@ -88,7 +74,7 @@ const Modal = ({ closeHandler, closeLabel, postId }) => {
                             {closeLabel}
                         </StButton>
                         )}
-                        <StButton2 className="editButton" onClick={onEditPost}
+                        <StButton2 className="editButton" onClick={() => onEditPost(post)}
                         >
                             수정하기
                         </StButton2>

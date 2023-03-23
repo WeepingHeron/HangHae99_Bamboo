@@ -38,10 +38,10 @@ function Home() {
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
         if (name === 'title') {
-            setTitle(value);
+            setTitle(event.target.value);
             setPost({...post, title: value});
         } else if (name === 'content') {
-            setContent(value);
+            setContent(event.target.value);
             setPost({...post, content: value});
         }
     };
@@ -102,7 +102,7 @@ function Home() {
                                 수정하기
                             </button>
                             {modalOpen &&
-                            <Modal closeHandler={closeModal} closeLabel='닫기'></Modal>}
+                            <Modal closeHandler={closeModal} closeLabel='닫기' post={post}/>}
                         <button
                             onClick={() => onDeletePost(post.id)}
                         >

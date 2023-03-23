@@ -38,8 +38,10 @@ const postSlice = createSlice({
         },
 
         getPostByID: (state, action) => {
-            state.post = state.posts.find((post) => post.id === action.payload);
-        }
+            const postId = action.payload;
+            state.post = state.posts.find((post) => post.id === postId);
+          },
+          
         
     },
     extraReducers: {
