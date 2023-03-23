@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { editPost, getPostByID } from "../redux/modules/postSlice";
+import { editPost } from "../redux/modules/postSlice";
 import axios from "axios";
 
 
@@ -35,6 +35,7 @@ const Modal = ({ closeHandler, closeLabel, post }) => {
             })
             .then(function () {
                 dispatch(editPost({ id: post.id, title, content}))
+                closeHandler();
             })
             .catch(function(error){
                 console.log(error);
@@ -79,7 +80,7 @@ const Modal = ({ closeHandler, closeLabel, post }) => {
                         )}
                         <StButton2 className="editButton" onClick={onEditPost}
                         >
-                            수정하기
+                            수정 완료
                         </StButton2>
                     </footer>
                 </section>
