@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { editPost } from "../redux/modules/postSlice";
+import { editPost, getPostByID } from "../redux/modules/postSlice";
 import axios from "axios";
 
 
 const Modal = ({ closeHandler, closeLabel, post }) => {
     const dispatch = useDispatch();
-    // const posts = useSelector((state) => state.postSlice.posts);
   
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     
   
     useEffect(() => {
-        dispatch(editPost());
-    }, [dispatch])
+        if (post) {
+          setTitle(post.title);
+          setContent(post.content);
+        }
+      }, [post]);
+
     // useEffect(() => {
     //     if (posts) {
     //         setTitle(posts.title);
@@ -24,14 +27,14 @@ const Modal = ({ closeHandler, closeLabel, post }) => {
     // }, [posts]);
       
 
-    const onEditPost = (post) => {
+    const onEditPost = () => {
             axios
             .put(`http://localhost:3001/posts/${post.id}`, {
-                title: title,
-                content: content
+                title,
+                content
             })
             .then(function () {
-                dispatch(editPost(post));
+                dispatch(editPost({ id: post.id, title, content}))
             })
             .catch(function(error){
                 console.log(error);
@@ -74,7 +77,7 @@ const Modal = ({ closeHandler, closeLabel, post }) => {
                             {closeLabel}
                         </StButton>
                         )}
-                        <StButton2 className="editButton" onClick={() => onEditPost(post)}
+                        <StButton2 className="editButton" onClick={onEditPost}
                         >
                             수정하기
                         </StButton2>
