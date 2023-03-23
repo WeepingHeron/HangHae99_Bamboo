@@ -36,6 +36,9 @@ function Header() {
                 <Link to="/signin">로그인</Link>
               )}
             </li>
+            <li>
+              <Link to="/signup">회원가입</Link>
+            </li>
           </SHeaderUl>
         </nav>
       </SHeaderWrap>

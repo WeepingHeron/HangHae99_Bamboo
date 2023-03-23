@@ -7,12 +7,9 @@ export const SHeader = styled.header`
   padding: 10px 20px;
   box-sizing: border-box;
 
-  background-color: black;
-  color: white;
-
   & h1 {
     font-size: 36px;
-    color: tomato;
+    color: #84b64e;
   }
 `;
 

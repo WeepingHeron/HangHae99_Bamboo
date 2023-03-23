@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-export const SSignIn = styled.div`
+export const SSignUp = styled.div`
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-export const SSignInForm = styled.form`
+export const SSignUpForm = styled.form`
   /* border: 1px solid black; */
   background-color: #84b64e;
   color: white;
@@ -15,11 +15,11 @@ export const SSignInForm = styled.form`
   padding: 40px;
 `;
 
-export const SSignInH1 = styled.h1`
+export const SSignUpH1 = styled.h1`
   margin-bottom: 20px;
 `;
 
-export const SSignInWrap = styled.div`
+export const SSignUpWrap = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -36,7 +36,7 @@ export const SSignInWrap = styled.div`
   }
 `;
 
-export const SSignInSubmit = styled.input`
+export const SSignUpSubmit = styled.input`
   background-color: salmon;
   color: white;
   padding: 20px;

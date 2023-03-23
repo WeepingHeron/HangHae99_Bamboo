@@ -4,6 +4,13 @@ import api from 'src/axios/api';
 import { signUpValidation } from 'src/utils/validation';
 import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
+import {
+  SSignUp,
+  SSignUpForm,
+  SSignUpH1,
+  SSignUpSubmit,
+  SSignUpWrap,
+} from 'src/styles/SignUp.styled';
 
 function SignUp() {
   const [id, onChangeIdHandler] = useInput('');
@@ -46,17 +53,10 @@ function SignUp() {
   return (
     <>
       <Header />
-      <div
-        style={{
-          height: '100vh',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        {/* <h1>회원가입</h1> */}
-        <form>
-          <div>
+      <SSignUp>
+        <SSignUpForm>
+          <SSignUpH1>회원가입</SSignUpH1>
+          <SSignUpWrap>
             <label htmlFor="">아이디</label>
             <input
               type="email"
@@ -66,8 +66,8 @@ function SignUp() {
               maxLength="50"
               minLength="6"
             />
-          </div>
-          <div>
+          </SSignUpWrap>
+          <SSignUpWrap>
             <label htmlFor="">패스워드</label>
             <input
               type="password"
@@ -77,8 +77,8 @@ function SignUp() {
               maxLength="15"
               minLength="8"
             />
-          </div>
-          <div>
+          </SSignUpWrap>
+          <SSignUpWrap>
             <label htmlFor="">닉네임</label>
             <input
               type="text"
@@ -88,8 +88,8 @@ function SignUp() {
               maxLength="10"
               minLength="4"
             />
-          </div>
-          <div>
+          </SSignUpWrap>
+          {/* <SSignUpWrap>
             <label htmlFor="">회원 종류</label>
             <input
               type="text"
@@ -97,8 +97,8 @@ function SignUp() {
               onChange={onChangeTypeHandler}
               required
             />
-          </div>
-          <input
+          </SSignUpWrap> */}
+          <SSignUpSubmit
             type="submit"
             value="회원가입"
             onClick={e => {
@@ -107,8 +107,8 @@ function SignUp() {
               if (check) onSubmitEventHandler();
             }}
           />
-        </form>
-      </div>
+        </SSignUpForm>
+      </SSignUp>
       <Footer />
     </>
   );

@@ -21,7 +21,6 @@ function Boards() {
       <OneBoard {...props}></OneBoard>
       <OneBoard {...props}></OneBoard>
       <OneBoard {...props}></OneBoard>
-      <OneBoard {...props}></OneBoard>
     </SBoards>
   );
 }
