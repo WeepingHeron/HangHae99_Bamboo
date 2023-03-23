@@ -20,24 +20,18 @@ function Home() {
 
     const posts = useSelector((state) => state.postSlice.posts)   // useSelector로 꺼내서
 
-    const onDeletePost = (id) => {
+    const onDeletePost = (postId) => {
         axios
-          .delete(`http://localhost:3001/posts/${id}`)
-          .then(function (response) {
-            console.log(response);
-            dispatch(deletePost(id));
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      };      
+        .delete(`http://localhost:3001/posts/${postId}`)
+        .then (function(){dispatch(deletePost(postId))})
+        .catch(function(error){console.error(error)});
+    };            
 
     const [post, setPost] = useState({    // useState 이용해 상태 관리
         id: 0,
         title: '',
         content:''
     })
-    const [id, setID] = useState(1);
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
@@ -63,8 +57,7 @@ function Home() {
           })
           .then(function (response) {
             console.log(response);
-            dispatch(addPost({ ...response.data, id: id }));
-            setID(id + 1);
+            dispatch(addPost({ ...response.data, id: posts.length + 1 }));
             setTitle("");
             setContent("");
           })
@@ -101,7 +94,7 @@ function Home() {
                 <div>
             {posts?.map((post) => {
                 return (    // useSelector로 redux에서 꺼내 온 기존 글
-                    <div key={post}>
+                    <div key={post.id}>
                     <h2 className="post-title">{post.title}</h2>
                     <div>{post.content}</div>
                         <button
