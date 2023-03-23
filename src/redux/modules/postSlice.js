@@ -26,15 +26,32 @@ const postSlice = createSlice({
 
         deletePost: (state, action) => {
             state.posts = state.posts.filter((post) => post.id !== action.payload)
+        },
+
+        editPost: (state, action) => {
+            const { id, title, content } = action.payload;
+            const existingPost = state.posts.find((post) => post.id === id);
+            if (existingPost) {
+                existingPost.title = title;
+                existingPost.content = content;
+            }
+        },
+
+        getPostByID: (state, action) => {
+            state.post = state.posts.find((post) => post.id === action.payload);
         }
+        
     },
     extraReducers: {
-        [getPostsThunk.fulfilled]: (state, action) => {state.posts = action.payload}
-    }
+        [getPostsThunk.fulfilled]: (state, action) => {
+          return { ...state, posts: action.payload };
+        }
+      }
+      
     });
 
 export default postSlice;
-export const { addPost, deletePost } = postSlice.actions;
+export const { addPost, deletePost, editPost, getPostByID } = postSlice.actions;
 
 // 1. 화면에 addPost로 해서 내용 띄우기
 
